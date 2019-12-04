@@ -1,0 +1,13 @@
+// For Tablets
+@mixin tablets {
+  @media only screen and (min-width: 600px) {
+    @content;
+  }
+}
+
+// For Desktop
+@mixin desktop {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
