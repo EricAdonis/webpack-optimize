@@ -5,14 +5,12 @@ import { useStores } from '@utils/hook/mobx'
 
 const Index: FC = () => {
 	return useObserver(() => {
-		const {
-			Authentication: { count, plus },
-		} = useStores()
+		const { Authentication } = useStores()
 		return (
 			<div>
-				<div>Count: {count}</div>
+				<div>Count: {Authentication?.count}</div>
 				<div>
-					<button onClick={plus}>Plus 1</button>
+					<button onClick={Authentication?.plus}>Plus 1</button>
 				</div>
 			</div>
 		)

@@ -59,6 +59,7 @@ const babelLoader = ({ isDev }) => ({
 				},
 			],
 			'object-to-json-parse',
+			'@babel/plugin-proposal-optional-chaining',
 			...(isDev ? [] : ['transform-remove-console']),
 		],
 	},
