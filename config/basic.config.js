@@ -23,8 +23,9 @@ const basicConfig = ({ isDev, PORT, isDevFast }) => ({
 	mode: isDev ? 'development' : 'production',
 	devtool: isDev ? 'cheap-module-eval-source-map' : '',
 	entry: [
-		path.resolve(__dirname, '../src/index.tsx'),
+		'react-hot-loader/patch',
 		path.resolve(__dirname, '../src/assets/scss/index.scss'),
+		path.resolve(__dirname, '../src/index.tsx'),
 		...(isDevFast ? ['webpack-hot-middleware/client?path=/__webpack_hmr'] : []),
 	],
 	output: {
