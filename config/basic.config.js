@@ -7,6 +7,7 @@ const {
 	scssLoader,
 	postCssLoader,
 	babelLoader,
+	swcLoader,
 	imageLoader,
 	imageOptimizeLoader,
 	fontLoader,
