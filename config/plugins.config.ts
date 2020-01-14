@@ -1,27 +1,29 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const WebpackBar = require('webpackbar')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const AutoDllPlugin = require('autodll-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="./index.d.ts" />
+import path from 'path'
+import webpack, { Plugin } from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import WebpackBar from 'webpackbar'
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
+import AutoDllPlugin from 'autodll-webpack-plugin'
 
-const defaultPlugin = ({ isDev }) => [
+export interface IPlugin {
+	isDev: boolean
+}
+
+export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
 	new webpack.optimize.MinChunkSizePlugin({
 		minChunkSize: 512,
 	}),
-	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 	new HtmlWebpackPlugin({
 		template: path.resolve(__dirname, '../public/index.html'),
 		inject: true,
 	}),
 	new CleanWebpackPlugin(),
-	new WebpackBar(),
-	new HardSourceWebpackPlugin(),
 	new MiniCssExtractPlugin({
 		filename: isDev ? 'static/css/[name].css' : 'static/css/[name].[hash].css',
 		chunkFilename: isDev
@@ -30,9 +32,11 @@ const defaultPlugin = ({ isDev }) => [
 		ignoreOrder: false,
 	}),
 	new ForkTsCheckerWebpackPlugin(),
+	new WebpackBar(),
+	new HardSourceWebpackPlugin(),
 ]
 
-const optimizePlugins = ({ isDev }) => [
+export const optimizePlugins = ({ isDev }: IPlugin): Plugin[] => [
 	...defaultPlugin({ isDev }),
 	...(isDev
 		? [new webpack.HotModuleReplacementPlugin()]
@@ -60,5 +64,3 @@ const optimizePlugins = ({ isDev }) => [
 				}),
 		  ]),
 ]
-
-module.exports = { optimizePlugins }

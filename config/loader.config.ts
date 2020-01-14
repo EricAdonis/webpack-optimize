@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const autoprefixer = require('autoprefixer')
-const cssnano = require('cssnano')
-const globImporter = require('node-sass-glob-importer')
+import { RuleSetLoader } from 'webpack'
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
+import globImporter from 'node-sass-glob-importer'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-const threadLoader = () => ({
+export const threadLoader = (): RuleSetLoader => ({
 	loader: 'thread-loader',
 	options: {
 		workers: require('os').cpus().length,
@@ -12,7 +12,7 @@ const threadLoader = () => ({
 	},
 })
 
-const postCssLoader = () => ({
+export const postCssLoader = (): RuleSetLoader => ({
 	loader: 'postcss-loader',
 	options: {
 		ident: 'postcss',
@@ -20,11 +20,11 @@ const postCssLoader = () => ({
 	},
 })
 
-const cssLoader = () => ({
+export const cssLoader = (): RuleSetLoader => ({
 	loader: 'css-loader',
 })
 
-const scssLoader = () => ({
+export const scssLoader = (): RuleSetLoader => ({
 	loader: 'sass-loader',
 	options: {
 		sassOptions: {
@@ -33,7 +33,7 @@ const scssLoader = () => ({
 	},
 })
 
-const babelLoader = ({ isDev }) => ({
+export const babelLoader = ({ isDev }): RuleSetLoader => ({
 	loader: 'babel-loader',
 	options: {
 		cacheDirectory: true,
@@ -57,17 +57,16 @@ const babelLoader = ({ isDev }) => ({
 				},
 			],
 			'object-to-json-parse',
-			'@babel/plugin-proposal-optional-chaining',
 			...(isDev ? [] : ['transform-remove-console']),
 		],
 	},
 })
 
-const fileLoader = () => ({
+export const fileLoader = (): RuleSetLoader => ({
 	loader: 'file-loader',
 })
 
-const imageLoader = () => ({
+export const imageLoader = () => ({
 	...fileLoader(),
 	options: {
 		outputPath: 'static/assets/images',
@@ -75,11 +74,11 @@ const imageLoader = () => ({
 	},
 })
 
-const imageOptimizeLoader = () => ({
+export const imageOptimizeLoader = (): RuleSetLoader => ({
 	loader: 'image-webpack-loader',
 })
 
-const fontLoader = () => ({
+export const fontLoader = (): RuleSetLoader => ({
 	...fileLoader(),
 	options: {
 		outputPath: 'static/assets/fonts',
@@ -87,31 +86,17 @@ const fontLoader = () => ({
 	},
 })
 
-const htmlLoader = () => ({
+export const htmlLoader = (): RuleSetLoader => ({
 	loader: 'html-loader',
 	options: {
 		minimize: true,
 	},
 })
 
-const extractCssPlugin = ({ isDev }) => ({
+export const extractCssPlugin = ({ isDev }): RuleSetLoader => ({
 	loader: MiniCssExtractPlugin.loader,
 	options: {
 		hmr: isDev,
 		reloadAll: isDev,
 	},
 })
-
-module.exports = {
-	threadLoader,
-	postCssLoader,
-	cssLoader,
-	scssLoader,
-	babelLoader,
-	fileLoader,
-	imageLoader,
-	imageOptimizeLoader,
-	fontLoader,
-	htmlLoader,
-	extractCssPlugin,
-}

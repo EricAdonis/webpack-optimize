@@ -13,7 +13,7 @@
 		"declaration": false /* Generates corresponding '.d.ts' file. */,
 		// "outFile": "./",                       /* Concatenate and emit output to single file. */
 		"outDir": "./dist" /* Redirect output structure to the directory. */,
-		"rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+		"rootDir": "./" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
 		// "composite": true,                     /* Enable project compilation */
 		// "tsBuildInfoFile": "./",               /* Specify file to store incremental compilation information */
 		// "removeComments": true,                /* Do not emit comments to output. */
@@ -74,10 +74,6 @@
 		"./src/**/*.ts",
 		"./src/**/*.tsx",
 		"./src/**/*.js",
-		"./src/**/*.jsx",
-		"./src/**/*.r.ts",
-		"./src/**/*.r.tsx",
-		"./src/**/*.r.js",
-		"./src/**/*.r.jsx"
+		"./src/**/*.jsx"
 	]
 }

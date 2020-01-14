@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path')
+import path from 'path'
+import { Resolve } from 'webpack'
 
-const resolve = () => ({
+export const resolve = (): Partial<Resolve> => ({
 	alias: {
 		'@src': path.resolve(__dirname, '../src'),
 		'@components': path.resolve(__dirname, '../src/components'),
@@ -12,5 +12,3 @@ const resolve = () => ({
 		'@utils': path.resolve(__dirname, '../src/utils'),
 	},
 })
-
-module.exports = { resolve }

@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const TerserPlugin = require('terser-webpack-plugin')
+import TerserPlugin from 'terser-webpack-plugin'
+import { Options } from 'webpack'
 
-const optimization = () => ({
+export const optimization = (): Options.Optimization => ({
 	usedExports: true,
 	moduleIds: 'hashed',
 	runtimeChunk: 'single',
@@ -30,5 +30,3 @@ const optimization = () => ({
 	],
 	minimize: true,
 })
-
-module.exports = { optimization }

@@ -1,33 +1,38 @@
-/* eslint-disable @typescript-eslint/camelcase */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path')
+import path from 'path'
+import { Configuration } from 'webpack'
 
-const {
+import { optimization } from './optimization.config'
+import { optimizePlugins } from './plugins.config'
+import { resolve } from './resolve.alias.config'
+import {
 	cssLoader,
 	scssLoader,
 	postCssLoader,
 	babelLoader,
-	swcLoader,
 	imageLoader,
 	imageOptimizeLoader,
 	fontLoader,
 	htmlLoader,
 	threadLoader,
 	extractCssPlugin,
-} = require('./loader.config')
-const { optimization } = require('./optimization.config')
-const { resolve } = require('./resolve.alias.config')
-const { optimizePlugins } = require('./plugins.config')
+} from './loader.config'
 
-const basicConfig = ({ isDev, PORT, isDevFast }) => ({
+export interface IBasicConfig {
+	isDev: boolean
+}
+
+export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 	cache: true,
 	mode: isDev ? 'development' : 'production',
-	devtool: isDev ? 'cheap-module-eval-source-map' : '',
 	entry: [
-		'react-hot-loader/patch',
+		...(isDev
+			? [
+					'react-hot-loader/patch',
+					'webpack-hot-middleware/client?path=/__webpack_hmr',
+			  ]
+			: []),
 		path.resolve(__dirname, '../src/assets/scss/index.scss'),
 		path.resolve(__dirname, '../src/index.tsx'),
-		...(isDevFast ? ['webpack-hot-middleware/client?path=/__webpack_hmr'] : []),
 	],
 	output: {
 		path: path.resolve(__dirname, '../dist'),
@@ -35,27 +40,15 @@ const basicConfig = ({ isDev, PORT, isDevFast }) => ({
 		chunkFilename: 'static/js/chunk/[id].[contenthash].chunk.js',
 		publicPath: '/',
 	},
-	devServer: {
-		port: PORT || 10000,
-		contentBase: path.resolve(__dirname, 'dist'),
-		historyApiFallback: true,
-		hot: true,
-		hotOnly: true,
-		compress: true,
-		inline: true,
-		noInfo: true,
-		overlay: false,
-		clientLogLevel: 'silent',
-	},
 	optimization: optimization(),
+	plugins: optimizePlugins({ isDev }),
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '*'],
 		alias: {
 			...resolve().alias,
-			'react-dom': '@hot-loader/react-dom',
+			'react-dom': isDev ? '@hot-loader/react-dom' : 'react-dom',
 		},
 	},
-	plugins: optimizePlugins({ isDev }),
 	performance: {
 		hints: false,
 	},
@@ -67,7 +60,6 @@ const basicConfig = ({ isDev, PORT, isDevFast }) => ({
 		http2: 'empty',
 		net: 'empty',
 		tls: 'empty',
-		child_process: 'empty',
 	},
 	module: {
 		rules: [
@@ -116,5 +108,3 @@ const basicConfig = ({ isDev, PORT, isDevFast }) => ({
 		],
 	},
 })
-
-module.exports = { basicConfig }
