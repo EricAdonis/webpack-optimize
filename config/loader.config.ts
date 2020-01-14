@@ -25,6 +25,9 @@ export const cssLoader = (): RuleSetLoader => ({
 
 export const scssLoader = (): RuleSetLoader => ({
 	loader: 'sass-loader',
+	options: {
+		implementation: require('sass'),
+	},
 })
 
 export const babelLoader = ({ isDev }): RuleSetLoader => ({
