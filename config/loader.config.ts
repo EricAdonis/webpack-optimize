@@ -1,13 +1,12 @@
 import { RuleSetLoader } from 'webpack'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
-import globImporter from 'node-sass-glob-importer'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 export const threadLoader = (): RuleSetLoader => ({
 	loader: 'thread-loader',
 	options: {
-		workers: require('os').cpus().length,
+		workers: require('os').cpus().length * 2,
 		workerParallelJobs: 2,
 	},
 })
@@ -26,11 +25,6 @@ export const cssLoader = (): RuleSetLoader => ({
 
 export const scssLoader = (): RuleSetLoader => ({
 	loader: 'sass-loader',
-	options: {
-		sassOptions: {
-			importer: globImporter(),
-		},
-	},
 })
 
 export const babelLoader = ({ isDev }): RuleSetLoader => ({

@@ -83,13 +83,7 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 							cssLoader(),
 							postCssLoader(),
 							scssLoader(),
-							// {
-							// 	loader: path.resolve(
-							// 		__dirname,
-							// 		'../loaders/fast-sass-loader.ts'
-							// 	),
-							// },
-							// threadLoader(),
+							threadLoader(),
 						],
 					},
 				],
@@ -97,7 +91,7 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 			{
 				test: /\.(js|jsx|ts|tsx)/,
 				exclude: /(node_modules)/,
-				use: [threadLoader(), babelLoader({ isDev })],
+				use: [babelLoader({ isDev }), threadLoader()],
 			},
 			{
 				test: /\.(svg|png|jpe?g|gif)$/,
