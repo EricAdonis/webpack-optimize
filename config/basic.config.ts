@@ -83,7 +83,13 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 							cssLoader(),
 							postCssLoader(),
 							scssLoader(),
-							threadLoader(),
+							// {
+							// 	loader: path.resolve(
+							// 		__dirname,
+							// 		'../loaders/fast-sass-loader.ts'
+							// 	),
+							// },
+							// threadLoader(),
 						],
 					},
 				],

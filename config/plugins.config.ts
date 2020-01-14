@@ -33,7 +33,7 @@ export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
 	}),
 	new ForkTsCheckerWebpackPlugin(),
 	new WebpackBar(),
-	new HardSourceWebpackPlugin(),
+	// new HardSourceWebpackPlugin(),
 ]
 
 export const optimizePlugins = ({ isDev }: IPlugin): Plugin[] => [
