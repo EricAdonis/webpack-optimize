@@ -68,12 +68,7 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 					{
 						test: /\.css$/,
 						sideEffects: true,
-						use: [
-							extractCssPlugin({ isDev }),
-							cssLoader(),
-							postCssLoader(),
-							threadLoader(),
-						],
+						use: [extractCssPlugin({ isDev }), cssLoader(), postCssLoader()],
 					},
 					{
 						test: /\.(scss|sass)$/,
@@ -83,7 +78,6 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 							cssLoader(),
 							postCssLoader(),
 							scssLoader(),
-							threadLoader(),
 						],
 					},
 				],
@@ -91,19 +85,19 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 			{
 				test: /\.(js|jsx|ts|tsx)/,
 				exclude: /(node_modules)/,
-				use: [babelLoader({ isDev }), threadLoader()],
+				use: [threadLoader(), babelLoader({ isDev })],
 			},
 			{
 				test: /\.(svg|png|jpe?g|gif)$/,
-				use: [imageLoader(), imageOptimizeLoader(), threadLoader()],
+				use: [threadLoader(), imageLoader(), imageOptimizeLoader()],
 			},
 			{
 				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-				use: [fontLoader(), threadLoader()],
+				use: [threadLoader(), fontLoader()],
 			},
 			{
 				test: /\.html$/,
-				use: [htmlLoader(), threadLoader()],
+				use: [threadLoader(), htmlLoader()],
 			},
 		],
 	},
