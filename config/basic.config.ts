@@ -40,7 +40,7 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 		chunkFilename: 'static/js/chunk/[id].[contenthash].chunk.js',
 		publicPath: '/',
 	},
-	optimization: optimization(),
+	optimization: optimization({ isDev }),
 	plugins: optimizePlugins({ isDev }),
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '*'],
@@ -83,9 +83,14 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 				],
 			},
 			{
-				test: /\.(js|jsx|ts|tsx)/,
+				test: /\.(ts|tsx)/,
 				exclude: /(node_modules)/,
 				use: [threadLoader(), babelLoader({ isDev })],
+			},
+			{
+				test: /\.(js|jsx)/,
+				exclude: /(node_modules)/,
+				use: [babelLoader({ isDev })],
 			},
 			{
 				test: /\.(svg|png|jpe?g|gif)$/,

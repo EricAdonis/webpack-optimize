@@ -7,7 +7,6 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import WebpackBar from 'webpackbar'
-import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import AutoDllPlugin from 'autodll-webpack-plugin'
 
@@ -33,7 +32,6 @@ export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
 	}),
 	new ForkTsCheckerWebpackPlugin(),
 	new WebpackBar(),
-	// new HardSourceWebpackPlugin(),
 ]
 
 export const optimizePlugins = ({ isDev }: IPlugin): Plugin[] => [
