@@ -8,8 +8,9 @@
 	"roots": ["<rootDir>/src"],
 	"testRegex": "\\.test\\.(ts|tsx)?$",
 	"transform": {
-		"^.+\\.tsx?$": "ts-jest",
-		"^.+\\.ts?$": "ts-jest"
+		"^.+\\.stories\\.jsx?$": "@storybook/addon-storyshots/injectFileName",
+		"^.+\\.(ts|tsx|js|jsx)?$": "ts-jest",
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest/fileTransformer.ts"
 	},
 	"moduleNameMapper": {
 		"^@src/(.*)$": "<rootDir>/src/$1",
@@ -18,9 +19,12 @@
 		"^@configs/(.*)$": "<rootDir>/src/configs/$1",
 		"^@pages/(.*)$": "<rootDir>/src/pages/$1",
 		"^@assets/(.*)$": "<rootDir>/src/assets/$1",
-		"^@utils/(.*)$": "<rootDir>/src/utils/$1"
+		"^@utils/(.*)$": "<rootDir>/src/utils/$1",
+		"react-syntax-highlighter/dist/esm/(.*)": "react-syntax-highlighter/dist/cjs/$1",
+		"\\.(css|scss)$": "identity-obj-proxy"
 	},
 	"setupFilesAfterEnv": ["./jest/jest.config.ts"],
 	"collectCoverage": true,
-	"collectCoverageFrom": ["**/*.{ts,tsx}", "!**/src/**/*.stories.tsx"]
+	"collectCoverageFrom": ["**/*.{ts,tsx}", "!**/src/**/*.stories.tsx"],
+	"testPathIgnorePatterns": ["<rootDir>/dist/", "<rootDir>/node_modules/"]
 }
