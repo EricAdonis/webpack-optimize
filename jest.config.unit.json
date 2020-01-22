@@ -1,0 +1,26 @@
+{
+	"globals": {
+		"ts-jest": {
+			"tsConfig": "tsconfig.json",
+			"babelConfig": {}
+		}
+	},
+	"roots": ["<rootDir>/src"],
+	"testRegex": "\\.test\\.(ts|tsx)?$",
+	"transform": {
+		"^.+\\.tsx?$": "ts-jest",
+		"^.+\\.ts?$": "ts-jest"
+	},
+	"moduleNameMapper": {
+		"^@src/(.*)$": "<rootDir>/src/$1",
+		"^@components/(.*)$": "<rootDir>/src/components/$1",
+		"^@libs/(.*)$": "<rootDir>/src/libs/$1",
+		"^@configs/(.*)$": "<rootDir>/src/configs/$1",
+		"^@pages/(.*)$": "<rootDir>/src/pages/$1",
+		"^@assets/(.*)$": "<rootDir>/src/assets/$1",
+		"^@utils/(.*)$": "<rootDir>/src/utils/$1"
+	},
+	"setupFilesAfterEnv": ["./jest/jest.config.ts"],
+	"collectCoverage": true,
+	"collectCoverageFrom": ["**/*.{ts,tsx}", "!**/src/**/*.stories.tsx"]
+}
