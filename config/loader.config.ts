@@ -6,8 +6,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 export const threadLoader = (): RuleSetLoader => ({
 	loader: 'thread-loader',
 	options: {
-		workers: require('os').cpus().length * 2,
-		workerParallelJobs: 2,
+		workers: require('os').cpus().length,
+		workerParallelJobs: 50,
+		workerNodeArgs: ['--max-old-space-size=2048'],
+		poolParallelJobs: 500,
 	},
 })
 
@@ -96,4 +98,16 @@ export const extractCssPlugin = ({ isDev }): RuleSetLoader => ({
 		hmr: isDev,
 		reloadAll: isDev,
 	},
+})
+
+export const docGenTSLoader = (): RuleSetLoader => ({
+	loader: 'react-docgen-typescript-loader',
+})
+
+export const styleLoader = (): RuleSetLoader => ({
+	loader: 'style-loader',
+})
+
+export const cacheLoader = (): RuleSetLoader => ({
+	loader: 'cache-loader',
 })

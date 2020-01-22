@@ -15,13 +15,20 @@ import {
 	htmlLoader,
 	threadLoader,
 	extractCssPlugin,
+	docGenTSLoader,
+	styleLoader,
+	cacheLoader,
 } from './loader.config'
 
 export interface IBasicConfig {
 	isDev: boolean
+	isStories?: boolean
 }
 
-export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
+export const basicConfig = ({
+	isDev,
+	isStories,
+}: IBasicConfig): Configuration => ({
 	cache: true,
 	mode: isDev ? 'development' : 'production',
 	entry: [
@@ -68,13 +75,19 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 					{
 						test: /\.css$/,
 						sideEffects: true,
-						use: [extractCssPlugin({ isDev }), cssLoader(), postCssLoader()],
+						use: [
+							cacheLoader(),
+							...(isStories ? [styleLoader()] : [extractCssPlugin({ isDev })]),
+							cssLoader(),
+							postCssLoader(),
+						],
 					},
 					{
 						test: /\.(scss|sass)$/,
 						sideEffects: true,
 						use: [
-							extractCssPlugin({ isDev }),
+							cacheLoader(),
+							...(isStories ? [styleLoader()] : [extractCssPlugin({ isDev })]),
 							cssLoader(),
 							postCssLoader(),
 							scssLoader(),
@@ -85,24 +98,34 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 			{
 				test: /\.(ts|tsx)/,
 				exclude: /(node_modules)/,
-				use: [threadLoader(), babelLoader({ isDev })],
+				use: [
+					cacheLoader(),
+					threadLoader(),
+					babelLoader({ isDev }),
+					...(isStories ? [docGenTSLoader()] : []),
+				],
 			},
 			{
 				test: /\.(js|jsx)/,
 				exclude: /(node_modules)/,
-				use: [babelLoader({ isDev })],
+				use: [cacheLoader(), babelLoader({ isDev })],
 			},
 			{
 				test: /\.(svg|png|jpe?g|gif)$/,
-				use: [threadLoader(), imageLoader(), imageOptimizeLoader()],
+				use: [
+					cacheLoader(),
+					threadLoader(),
+					imageLoader(),
+					...(isDev ? [] : [imageOptimizeLoader()]),
+				],
 			},
 			{
 				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-				use: [threadLoader(), fontLoader()],
+				use: [cacheLoader(), threadLoader(), fontLoader()],
 			},
 			{
 				test: /\.html$/,
-				use: [threadLoader(), htmlLoader()],
+				use: [cacheLoader(), threadLoader(), htmlLoader()],
 			},
 		],
 	},
