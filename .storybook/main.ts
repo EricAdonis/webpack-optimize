@@ -13,6 +13,7 @@ export default {
 			plugins,
 			module,
 			resolve: { extensions, alias },
+			node,
 		} = basicConfig({ isDev: true, isStories: true })
 		delete alias['react-dom']
 		return {
@@ -28,6 +29,7 @@ export default {
 				extensions,
 				alias,
 			},
+			node,
 		}
 	},
 }

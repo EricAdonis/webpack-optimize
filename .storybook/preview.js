@@ -5,20 +5,21 @@ const {
 	MINIMAL_VIEWPORTS,
 } = require('@storybook/addon-viewport')
 const { withInfo } = require('@storybook/addon-info')
-const registerRequireContextHook = require('babel-plugin-require-context-hook/register')
 
-registerRequireContextHook()
-const req = global.__requireContext(
-	__dirname,
-	'../src/components',
-	true,
-	/\.stories\.tsx$/
-)
-function loadStories() {
-	req.keys().forEach(filename => req(filename))
+if (process.env.NODE_ENV === 'test') {
+	const registerRequireContextHook = require('babel-plugin-require-context-hook/register')
+	registerRequireContextHook()
+	const req = global.__requireContext(
+		__dirname,
+		'../src/components',
+		true,
+		/\.stories\.tsx$/
+	)
+	function loadStories() {
+		req.keys().forEach(filename => req(filename))
+	}
+	configure(loadStories, module)
 }
-
-configure(loadStories, module)
 
 addParameters({
 	viewport: {

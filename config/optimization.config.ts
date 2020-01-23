@@ -1,7 +1,11 @@
 import TerserPlugin from 'terser-webpack-plugin'
 import { Options } from 'webpack'
 
-export const optimization = ({ isDev }): Options.Optimization => ({
+export const optimization = ({
+	isDev,
+}: {
+	isDev: boolean
+}): Options.Optimization => ({
 	usedExports: true,
 	moduleIds: 'hashed',
 	runtimeChunk: 'single',

@@ -32,7 +32,7 @@ export const scssLoader = (): RuleSetLoader => ({
 	},
 })
 
-export const babelLoader = ({ isDev }): RuleSetLoader => ({
+export const babelLoader = ({ isDev }: { isDev: boolean }): RuleSetLoader => ({
 	loader: 'babel-loader',
 	options: {
 		cacheDirectory: true,
@@ -92,7 +92,11 @@ export const htmlLoader = (): RuleSetLoader => ({
 	},
 })
 
-export const extractCssPlugin = ({ isDev }): RuleSetLoader => ({
+export const extractCssPlugin = ({
+	isDev,
+}: {
+	isDev: boolean
+}): RuleSetLoader => ({
 	loader: MiniCssExtractPlugin.loader,
 	options: {
 		hmr: isDev,
