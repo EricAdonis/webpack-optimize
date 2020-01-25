@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 
-export interface IProps {
-	disable?: boolean
-}
+import { mapClassName } from '@libs/components'
 
-export const Button: FC<IProps> = ({ disable }) => (
-	<button>{disable ? 'unActive' : 'Active'}</button>
+export type IModifier = 'primary' | 'secondary'
+export interface IProps {
+	modifier?: IModifier | IModifier[]
+}
+export const Button: FC<IProps> = ({ children, modifier }) => (
+	<button className={mapClassName('a-button', modifier)}>{children}</button>
 )

@@ -5,4 +5,5 @@ import { Button } from './'
 
 storiesOf('Atoms/Button', module)
 	.add('default', () => <Button>default</Button>)
-	.add('with Disable', () => <Button disable>default</Button>)
+	.add('primary', () => <Button modifier='primary'>primary</Button>)
+	.add('secondary', () => <Button modifier='secondary'>secondary</Button>)

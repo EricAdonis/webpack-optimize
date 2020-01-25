@@ -12,6 +12,7 @@ import AutoDllPlugin from 'autodll-webpack-plugin'
 
 export interface IPlugin {
 	isDev: boolean
+	isStories?: boolean
 }
 
 export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
@@ -34,10 +35,10 @@ export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
 	new WebpackBar(),
 ]
 
-export const optimizePlugins = ({ isDev }: IPlugin): Plugin[] => [
+export const optimizePlugins = ({ isDev, isStories }: IPlugin): Plugin[] => [
 	...defaultPlugin({ isDev }),
 	...(isDev
-		? [new webpack.HotModuleReplacementPlugin()]
+		? [...(isStories ? [] : [new webpack.HotModuleReplacementPlugin()])]
 		: [
 				new OptimizeCSSAssetsPlugin({
 					cssProcessor: require('cssnano'),

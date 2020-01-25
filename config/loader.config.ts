@@ -2,6 +2,8 @@ import { RuleSetLoader } from 'webpack'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import globImporter from 'node-sass-glob-importer'
+import path from 'path'
 
 export const threadLoader = (): RuleSetLoader => ({
 	loader: 'thread-loader',
@@ -28,7 +30,11 @@ export const cssLoader = (): RuleSetLoader => ({
 export const scssLoader = (): RuleSetLoader => ({
 	loader: 'sass-loader',
 	options: {
-		implementation: require('sass'),
+		implementation: require('node-sass'),
+		sassOptions: {
+			importer: globImporter(),
+		},
+		// implementation: require('sass'),
 	},
 })
 
@@ -106,6 +112,9 @@ export const extractCssPlugin = ({
 
 export const docGenTSLoader = (): RuleSetLoader => ({
 	loader: 'react-docgen-typescript-loader',
+	options: {
+		// tsconfigPath: path.resolve(__dirname, '../tsconfig.json'),
+	},
 })
 
 export const styleLoader = (): RuleSetLoader => ({

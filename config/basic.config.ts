@@ -38,7 +38,6 @@ export const basicConfig = ({
 					'webpack-hot-middleware/client?path=/__webpack_hmr',
 			  ]
 			: []),
-		path.resolve(__dirname, '../src/assets/scss/index.scss'),
 		path.resolve(__dirname, '../src/index.tsx'),
 	],
 	output: {
@@ -48,7 +47,7 @@ export const basicConfig = ({
 		publicPath: '/',
 	},
 	optimization: optimization({ isDev }),
-	plugins: optimizePlugins({ isDev }),
+	plugins: optimizePlugins({ isDev, isStories }),
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '*'],
 		alias: {
