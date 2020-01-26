@@ -1,0 +1,17 @@
+{
+	"plugins": [
+		"stylelint-prettier",
+		"stylelint-color-format",
+		"stylelint-group-selectors",
+		"stylelint-order",
+		"stylelint-scss"
+	],
+	"rules": {
+		"prettier/prettier": true,
+		"color-format/format": {
+			"format": "rgba"
+		},
+		"plugin/stylelint-group-selectors": true,
+		"order/properties-alphabetical-order": true
+	}
+}

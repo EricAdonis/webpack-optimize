@@ -1,13 +1,19 @@
 .a-button {
-	padding: 3px 12px;
-	border-radius: 1px;
 	border: 1px solid $COLOR_TWINKLE_BLUE;
-	outline: none;
+	border-radius: 1px;
 	line-height: 15px;
+	outline: none;
+	padding: 3px 12px;
 
 	&-primary {
-		border: 1px solid $COLOR_TURGUOISE_TOPAZ;
 		background-color: $COLOR_PRIMARY;
+		border: 1px solid $COLOR_TURGUOISE_TOPAZ;
+		color: $COLOR_FFF;
+	}
+
+	&-secondary {
+		background-color: $COLOR_BLUE_HORIZON;
+		border: 1px solid $COLOR_BLUE_GRAY;
 		color: $COLOR_FFF;
 	}
 }

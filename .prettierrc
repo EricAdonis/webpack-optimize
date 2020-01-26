@@ -11,7 +11,8 @@
 			"files": ["*.scss"],
 			"options": {
 				"semi": true,
-				"trailingComma": "none"
+				"trailingComma": "none",
+				"prettier/prettier": true
 			}
 		}
 	]
