@@ -2,7 +2,6 @@
 	"plugins": [
 		"stylelint-prettier",
 		"stylelint-color-format",
-		"stylelint-group-selectors",
 		"stylelint-order",
 		"stylelint-scss"
 	],
@@ -11,7 +10,6 @@
 		"color-format/format": {
 			"format": "rgba"
 		},
-		"plugin/stylelint-group-selectors": true,
 		"order/properties-alphabetical-order": true
 	}
 }

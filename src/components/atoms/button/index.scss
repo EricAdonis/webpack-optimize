@@ -1,19 +1,36 @@
 .a-button {
-	border: 1px solid $COLOR_TWINKLE_BLUE;
-	border-radius: 1px;
-	line-height: 15px;
+	background-color: $COLOR_INNUENDO;
+	border: none;
+	border-radius: 3px;
+	color: $COLOR_FFF;
 	outline: none;
-	padding: 3px 12px;
+	padding: 6px 16px;
+	transition: box-shadow 250ms $ANIMATION_DEFAULT;
+
+	@include u-box-shadow-default();
+
+	&:hover {
+		@include u-box-shadow-hover();
+	}
+
+	&:disabled {
+		background-color: $COLOR_BG_DISABLE;
+		box-shadow: none;
+		color: $COLOR_DISABLE;
+		cursor: not-allowed;
+	}
+
+	> span {
+		@include u-fz(1.3em, 24px);
+	}
 
 	&-primary {
 		background-color: $COLOR_PRIMARY;
-		border: 1px solid $COLOR_TURGUOISE_TOPAZ;
 		color: $COLOR_FFF;
 	}
 
 	&-secondary {
 		background-color: $COLOR_BLUE_HORIZON;
-		border: 1px solid $COLOR_BLUE_GRAY;
 		color: $COLOR_FFF;
 	}
 }

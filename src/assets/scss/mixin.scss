@@ -1,13 +1,35 @@
 // For Tablets
 @mixin tablets {
-  @media only screen and (min-width: 600px) {
-    @content;
-  }
+	@media only screen and (min-width: 600px) {
+		@content;
+	}
 }
 
 // For Desktop
 @mixin desktop {
-  @media only screen and (min-width: 768px) {
-    @content;
-  }
+	@media only screen and (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin u-fz($font_size, $line_height, $letter_spacing: 0px) {
+	@if $font_size {
+		font-size: $font_size;
+	}
+	@if $line_height {
+		line-height: $line_height;
+	}
+	@if $letter_spacing {
+		letter-spacing: $letter_spacing;
+	}
+}
+
+@mixin u-box-shadow-default {
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+@mixin u-box-shadow-hover {
+	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+		0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
