@@ -1,5 +1,3 @@
-const { resolve } = require('path')
-
 module.exports = {
 	root: true,
 	env: {
@@ -21,7 +19,7 @@ module.exports = {
 		},
 		ecmaVersion: 11,
 		sourceType: 'module',
-		project: resolve(__dirname, './tsconfig.json'),
+		// project: './tsconfig.json',
 	},
 	plugins: ['react', 'react-hooks', '@typescript-eslint', 'jest'],
 	rules: {
@@ -57,4 +55,9 @@ module.exports = {
 			},
 		},
 	],
+	settings: {
+		react: {
+			version: 'latest',
+		},
+	},
 }
