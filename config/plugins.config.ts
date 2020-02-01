@@ -9,6 +9,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import WebpackBar from 'webpackbar'
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import AutoDllPlugin from 'autodll-webpack-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 export interface IPlugin {
 	isDev: boolean
@@ -61,5 +62,8 @@ export const optimizePlugins = ({ isDev, isStories }: IPlugin): Plugin[] => [
 						}),
 					],
 				}),
+				...(process.env.ANALYZER === 'true'
+					? [new BundleAnalyzerPlugin()]
+					: []),
 		  ]),
 ]
