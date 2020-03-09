@@ -124,7 +124,7 @@
 	"husky": {
 		"hooks": {
 			"pre-commit": "yarn test:lint",
-			"pre-push": "yarn test:unit"
+			"pre-push": "yarn test:lint"
 		}
 	}
 }
