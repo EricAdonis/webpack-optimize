@@ -15,20 +15,14 @@ import {
 	htmlLoader,
 	threadLoader,
 	extractCssPlugin,
-	docGenTSLoader,
-	styleLoader,
 	cacheLoader,
 } from './loader.config'
 
 export interface IBasicConfig {
 	isDev: boolean
-	isStories?: boolean
 }
 
-export const basicConfig = ({
-	isDev,
-	isStories,
-}: IBasicConfig): Configuration => ({
+export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 	cache: true,
 	mode: isDev ? 'development' : 'production',
 	entry: [
@@ -47,7 +41,7 @@ export const basicConfig = ({
 		publicPath: '/',
 	},
 	optimization: optimization({ isDev }),
-	plugins: optimizePlugins({ isDev, isStories }),
+	plugins: optimizePlugins({ isDev }),
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '*'],
 		alias: {
@@ -76,7 +70,7 @@ export const basicConfig = ({
 						sideEffects: true,
 						use: [
 							cacheLoader(),
-							...(isStories ? [styleLoader()] : [extractCssPlugin({ isDev })]),
+							extractCssPlugin({ isDev }),
 							cssLoader(),
 							postCssLoader(),
 						],
@@ -86,7 +80,7 @@ export const basicConfig = ({
 						sideEffects: true,
 						use: [
 							cacheLoader(),
-							...(isStories ? [styleLoader()] : [extractCssPlugin({ isDev })]),
+							extractCssPlugin({ isDev }),
 							cssLoader(),
 							postCssLoader(),
 							scssLoader(),
@@ -97,17 +91,12 @@ export const basicConfig = ({
 			{
 				test: /\.(ts|tsx)/,
 				exclude: /(node_modules)/,
-				use: [
-					cacheLoader(),
-					threadLoader(),
-					babelLoader({ isDev }),
-					...(isStories ? [docGenTSLoader()] : []),
-				],
+				use: [cacheLoader(), threadLoader(), babelLoader({ isDev })],
 			},
 			{
 				test: /\.(js|jsx)/,
 				exclude: /(node_modules)/,
-				use: [cacheLoader(), babelLoader({ isDev })],
+				use: [cacheLoader(), threadLoader(), babelLoader({ isDev })],
 			},
 			{
 				test: /\.(svg|png|jpe?g|gif)$/,

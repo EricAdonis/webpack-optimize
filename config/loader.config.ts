@@ -3,7 +3,6 @@ import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import globImporter from 'node-sass-glob-importer'
-import path from 'path'
 
 export const threadLoader = (): RuleSetLoader => ({
 	loader: 'thread-loader',

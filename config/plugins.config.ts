@@ -13,7 +13,6 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 export interface IPlugin {
 	isDev: boolean
-	isStories?: boolean
 }
 
 export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
@@ -36,10 +35,10 @@ export const defaultPlugin = ({ isDev }: IPlugin): Partial<Plugin[]> => [
 	new WebpackBar(),
 ]
 
-export const optimizePlugins = ({ isDev, isStories }: IPlugin): Plugin[] => [
+export const optimizePlugins = ({ isDev }: IPlugin): Plugin[] => [
 	...defaultPlugin({ isDev }),
 	...(isDev
-		? [...(isStories ? [] : [new webpack.HotModuleReplacementPlugin()])]
+		? [new webpack.HotModuleReplacementPlugin()]
 		: [
 				new OptimizeCSSAssetsPlugin({
 					cssProcessor: require('cssnano'),
