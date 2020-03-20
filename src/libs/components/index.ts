@@ -4,8 +4,7 @@ export const mapClassName = <T>(defaultClassName: string, ...some: T[]) => {
 		(some.length === 1 && typeof some[0] === 'undefined')
 	)
 		return defaultClassName
-	return [
-		defaultClassName,
-		...some.flatMap(v => [`${defaultClassName}-${v}`]),
-	].join(' ')
+	return [defaultClassName, ...some.flatMap(v => [`${defaultClassName}-${v}`])]
+		.join(' ')
+		.trim()
 }

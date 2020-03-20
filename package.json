@@ -36,6 +36,7 @@
 		"@types/jest": "^25.1.4",
 		"@types/lodash": "^4.14.149",
 		"@types/mini-css-extract-plugin": "^0.9.1",
+		"@types/nanoid": "^2.1.0",
 		"@types/node-sass": "^4.11.0",
 		"@types/optimize-css-assets-webpack-plugin": "^5.0.1",
 		"@types/react": "16.9.23",
@@ -101,6 +102,7 @@
 	"dependencies": {
 		"fastify": "^2.12.1",
 		"immer": "^6.0.2",
+		"nanoid": "^2.1.11",
 		"react": "^16.13.0",
 		"react-dom": "^16.13.0",
 		"react-redux": "^7.2.0",

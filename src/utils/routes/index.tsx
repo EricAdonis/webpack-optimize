@@ -1,5 +1,6 @@
 import React, { FC, Suspense, lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import nano from 'nanoid'
 
 import { SettingRoutes } from '@configs/routes'
 
@@ -7,9 +8,9 @@ export const Routes: FC = () => {
 	return (
 		<Suspense fallback={null}>
 			<Switch>
-				{SettingRoutes.map((route, idx) => (
+				{SettingRoutes.map(route => (
 					<Route
-						key={idx}
+						key={nano()}
 						exact={route.exact}
 						path={route.path}
 						render={() => {
