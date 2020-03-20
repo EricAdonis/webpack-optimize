@@ -70,8 +70,12 @@ export const fileLoader = (): RuleSetLoader => ({
 	loader: 'file-loader',
 })
 
-export const imageLoader = () => ({
-	...fileLoader(),
+export const urlLoader = (): RuleSetLoader => ({
+	loader: 'url-loader',
+})
+
+export const imageLoader = ({ isDev }) => ({
+	...(isDev ? urlLoader() : fileLoader()),
 	options: {
 		outputPath: 'static/assets/images',
 		name: '[name].[hash].[ext]',

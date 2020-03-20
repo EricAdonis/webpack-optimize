@@ -102,8 +102,8 @@ export const basicConfig = ({ isDev }: IBasicConfig): Configuration => ({
 				test: /\.(svg|png|jpe?g|gif)$/,
 				use: [
 					cacheLoader(),
-					threadLoader(),
-					imageLoader(),
+					...(!isDev ? [] : [threadLoader()]),
+					imageLoader({ isDev }),
 					...(isDev ? [] : [imageOptimizeLoader()]),
 				],
 			},
