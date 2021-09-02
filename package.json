@@ -102,7 +102,7 @@
 	},
 	"dependencies": {
 		"fastify": "^2.13.0",
-		"immer": "^6.0.2",
+		"immer": "^9.0.6",
 		"nanoid": "^2.1.11",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
